@@ -1,1 +1,3 @@
+include ':rxp-hpp-android'
+
 rootProject.name = 'hpp_flutter'

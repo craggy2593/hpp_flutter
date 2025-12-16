@@ -71,9 +71,5 @@ dependencies {
     implementation(project(':rxp-hpp-android')) {
         exclude group: "androidx.appcompat", module: "*"
     }
-
-    implementation(project(':rxp-remote-android')) {
-        exclude group: "androidx.appcompat", module: "*"
-    }
 }
 
