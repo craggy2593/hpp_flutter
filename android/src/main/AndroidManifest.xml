@@ -1,6 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
   package="com.example.hpp_flutter" xmlns:tools="http://schemas.android.com/tools">
-      <application
-        tools:replace="android:allowBackup">
+      <application>
       </application>
 </manifest>
