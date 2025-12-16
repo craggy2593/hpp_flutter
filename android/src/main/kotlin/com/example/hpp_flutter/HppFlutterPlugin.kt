@@ -7,9 +7,6 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.annotation.NonNull
-import com.google.gson.Gson
-import com.google.gson.annotations.SerializedName
-import com.google.gson.reflect.TypeToken
 import com.realexpayments.hpp.HPPManager
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
@@ -54,7 +51,7 @@ class HppFlutterPlugin :
         this.result = result
 
         if (call.method == "showPaymentWindow") {
-           val arguments: ArrayList<Any> = call.arguments<ArrayList<Any>>()
+           val arguments: ArrayList<Any>? = call.arguments<ArrayList<Any>?>()
                 val data = arguments.asPayloadData()
 
                 // validate
@@ -75,7 +72,7 @@ class HppFlutterPlugin :
                 intent.putExtra("hppData", bundle)
 
                 activity.startActivityForResult(intent, PAYMENT_REQUEST_CODE)
-        } (call.method == "getPlatformVersion") {
+        } else if (call.method == "getPlatformVersion") {
             result.success("Android ${android.os.Build.VERSION.RELEASE}")
         } else {
             result.notImplemented()
@@ -84,24 +81,6 @@ class HppFlutterPlugin :
 
     override fun onDetachedFromEngine(binding: FlutterPlugin.FlutterPluginBinding) {
         channel.setMethodCallHandler(null)
-    }
-
-    override fun onAttachedToActivity(binding: ActivityPluginBinding) {
-        activity = binding.activity
-        binding.addActivityResultListener(this)
-    }
-
-    override fun onDetachedFromActivityForConfigChanges() {
-        //no-op
-    }
-
-    override fun onReattachedToActivityForConfigChanges(binding: ActivityPluginBinding) {
-        activity = binding.activity
-        binding.addActivityResultListener(this)
-    }
-
-    override fun onDetachedFromActivity() {
-        //no-op
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?): Boolean {
@@ -126,7 +105,7 @@ data class PayloadData(@SerializedName("HPPRequestProducerURL") val hppRequestPr
                        @SerializedName("HPPURL") val hppURL: String
 )
 
-fun ArrayList<Any>.asPayloadData(): PayloadData? {
+fun ArrayList<Any>?.asPayloadData(): PayloadData? {
     val data: HashMap<String, Any>? = this[0] as HashMap<String, Any>
     return data?.toDataClass<PayloadData>()
 }
