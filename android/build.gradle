@@ -67,6 +67,13 @@ android {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'com.realexpayments.hpp.sdk:rxp-hpp-android:2.3'
+    
+    implementation(project(':rxp-hpp-android')) {
+        exclude group: "androidx.appcompat", module: "*"
+    }
+
+    implementation(project(':rxp-remote-android')) {
+        exclude group: "androidx.appcompat", module: "*"
+    }
 }
 
