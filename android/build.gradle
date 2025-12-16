@@ -67,9 +67,7 @@ android {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    
-    implementation(project(':rxp-hpp-android')) {
-        exclude group: "androidx.appcompat", module: "*"
-    }
+
+    implementation project(':rxp-hpp-android')
 }
 
