@@ -68,5 +68,6 @@ android {
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.realexpayments.hpp.sdk:rxp-hpp-android:2.2'
+    implementation 'com.google.code.gson:gson:2.13.2'
 }
 
