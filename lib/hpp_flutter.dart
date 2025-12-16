@@ -13,16 +13,8 @@ class HppResult {
 class HppFlutter {
   static const MethodChannel _channel = const MethodChannel('hpp_flutter');
 
-  static Future<HppResult> showPaymentWindow({
-    required String hppRequestProducerURL,
-    required String hppResponseConsumerURL,
-    required String hppURL,
-  }) async {
-    final payload = {
-      'HPPRequestProducerURL': hppRequestProducerURL,
-      'HPPResponseConsumerURL': hppResponseConsumerURL,
-      'HPPURL': hppURL,
-    };
+  static Future<HppResult> showPaymentWindow({required String hppURL}) async {
+    final payload = {'HPPURL': hppURL};
 
     final Map<dynamic, dynamic> result = await _channel.invokeMethod(
       'showPaymentWindow',
